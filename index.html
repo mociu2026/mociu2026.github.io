@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOCIU 2026 — Mostra de Ciências de Umuarama</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Bungee&family=Caveat:wght@600;700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#eaf4fb;
+    --sky-bot:#8fbfe3;
+    --ink:#132a36;
+    --ink-soft:#3c5566;
+    --paper:#fffdf7;
+    --highlight:#ffd93d;
+    --logo-blue:#1f6fb0;
+    --logo-green:#2fa969;
+    --logo-gold:#e2a836;
+    --logo-red:#d1503f;
+    --logo-teal:#1f7d78;
+    --aurora-1:#07222b;
+    --aurora-2:#0f5c53;
+    --aurora-3:#3fcf8e;
+    --aurora-4:#2f6fb8;
+    --cream:#fbf6ea;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--sky-bot);
+    overflow-x:hidden;
+  }
+
+  img{display:block;max-width:100%;}
+
+  /* ============ HERO ============ */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 15%, rgba(255,255,255,.9), transparent 60%),
+      radial-gradient(ellipse 55% 35% at 88% 8%, rgba(255,255,255,.75), transparent 60%),
+      radial-gradient(ellipse 70% 45% at 50% 95%, rgba(255,255,255,.5), transparent 60%),
+      linear-gradient(180deg, var(--sky-top) 0%, #cfe6f6 45%, var(--sky-bot) 100%);
+    padding:56px 24px 40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+  }
+
+  .eyebrow{
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--logo-teal);
+    background:rgba(255,255,255,.6);
+    border:1px solid rgba(31,125,120,.25);
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:34px;
+  }
+
+  /* ---- orbit collage (desktop) ---- */
+  .orbit{
+    position:relative;
+    width:min(1180px, 100%);
+    height:640px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .orbit-rings{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+  }
+  .orbit-rings svg{width:88%;height:88%;opacity:.35;}
+
+  .logo-center{
+    position:relative;
+    width:min(300px, 34vw);
+    z-index:5;
+    filter:drop-shadow(0 18px 34px rgba(20,60,80,.28));
+  }
+
+  .polaroid{
+    position:absolute;
+    background:var(--paper);
+    padding:10px 10px 34px;
+    border-radius:4px;
+    box-shadow:0 14px 28px rgba(20,50,70,.22), 0 2px 6px rgba(20,50,70,.15);
+    width:170px;
+  }
+  .polaroid img{border-radius:1px; aspect-ratio:3/4; object-fit:cover; object-position:top center;}
+  .polaroid .tag{
+    position:absolute;
+    bottom:9px; left:10px; right:10px;
+    font-family:'Space Mono',monospace;
+    font-size:10px;
+    color:#8a8574;
+    letter-spacing:.02em;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .p1{ top:2%;  left:2%;   width:190px; transform:rotate(-7deg);}
+  .p2{ top:40%; left:0%;   width:150px; transform:rotate(6deg);}
+  .p3{ bottom:0%; left:14%;  width:165px; transform:rotate(-3deg);}
+  .p4{ top:0%;  right:3%;  width:190px; transform:rotate(6deg);}
+  .p5{ top:38%; right:0%;  width:150px; transform:rotate(-7deg);}
+  .p6{ bottom:2%; right:12%; width:165px; transform:rotate(4deg);}
+
+  .headline-wrap{
+    text-align:center;
+    margin-top:18px;
+    max-width:720px;
+  }
+
+  .headline{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(28px, 4vw, 44px);
+    color:var(--ink);
+    line-height:1.15;
+  }
+
+  .headline .online{
+    font-style:italic;
+    font-weight:600;
+    position:relative;
+    white-space:nowrap;
+    padding:0 6px;
+  }
+  .headline .online::before{
+    content:"";
+    position:absolute;
+    left:-2px; right:-2px; bottom:2px; top:38%;
+    background:var(--highlight);
+    z-index:-1;
+    transform:skew(-4deg);
+    border-radius:2px;
+  }
+
+  .hero-sub{
+    margin-top:16px;
+    font-size:15px;
+    color:var(--ink-soft);
+    font-family:'Space Mono',monospace;
+    letter-spacing:.02em;
+  }
+
+  .scroll-cue{
+    margin-top:38px;
+    width:26px;height:42px;
+    border:2px solid var(--logo-teal);
+    border-radius:14px;
+    position:relative;
+    opacity:.55;
+  }
+  .scroll-cue::after{
+    content:"";
+    position:absolute;
+    top:8px; left:50%;
+    width:4px;height:8px;
+    background:var(--logo-teal);
+    border-radius:2px;
+    transform:translateX(-50%);
+    animation:scrollpulse 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollpulse{
+    0%{ top:8px; opacity:1;}
+    60%{ top:20px; opacity:0;}
+    100%{ top:8px; opacity:0;}
+  }
+
+  /* ============ AURORA / CTA SECTION ============ */
+  .cta-section{
+    position:relative;
+    background:
+      radial-gradient(ellipse 90% 60% at 20% 0%, rgba(63,207,142,.55), transparent 55%),
+      radial-gradient(ellipse 80% 55% at 85% 15%, rgba(47,111,184,.55), transparent 55%),
+      radial-gradient(ellipse 90% 70% at 50% 100%, rgba(15,92,83,.6), transparent 60%),
+      linear-gradient(160deg, var(--aurora-1) 0%, #0c3641 45%, #0a2c38 100%);
+    padding:110px 24px 90px;
+    overflow:hidden;
+  }
+
+  .cta-inner{
+    max-width:920px;
+    margin:0 auto;
+    text-align:center;
+    position:relative;
+    z-index:2;
+  }
+
+  .graffiti{
+    font-family:'Bungee', cursive;
+    font-size:clamp(30px, 6.4vw, 74px);
+    line-height:1.05;
+    letter-spacing:.01em;
+    background:linear-gradient(92deg,#ff9d6c 0%, #ff6ea8 22%, #c084fc 42%, #60d9c9 62%, #4ade80 80%, #ffd93d 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 6px 0 rgba(0,0,0,.18));
+    text-transform:uppercase;
+  }
+
+  .cta-copy{
+    margin-top:30px;
+    font-family:'Fraunces', serif;
+    font-size:clamp(17px, 2.1vw, 22px);
+    color:var(--cream);
+    line-height:1.6;
+  }
+  .cta-copy strong{font-weight:600;}
+  .cta-copy .line2{
+    display:block;
+    margin-top:18px;
+    font-size:clamp(15px,1.7vw,18px);
+    color:#c9dedb;
+  }
+
+  .cta-row{
+    margin-top:56px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px;
+    align-items:stretch;
+    justify-content:center;
+  }
+
+  /* sticky note */
+  .note{
+    background:var(--cream);
+    width:280px;
+    border-radius:10px;
+    padding:18px 20px 22px;
+    text-align:left;
+    box-shadow:0 20px 40px rgba(0,0,0,.35);
+    transform:rotate(-2.5deg);
+    position:relative;
+  }
+  .note-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    color:#8a8360;
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(0,0,0,.08);
+    margin-bottom:14px;
+  }
+  .note-flag{
+    display:inline-block;
+    background:var(--highlight);
+    color:#4a3c00;
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:3px;
+    margin-bottom:10px;
+    transform:rotate(-1deg);
+  }
+  .note p{
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    line-height:1.55;
+    color:#33301f;
+  }
+
+  .btn-stack{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    justify-content:center;
+    min-width:280px;
+  }
+
+  .btn{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:15.5px;
+    color:var(--ink);
+    background:var(--cream);
+    border:none;
+    border-radius:12px;
+    padding:20px 28px;
+    text-align:left;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 14px 30px rgba(0,0,0,.25);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 20px 38px rgba(0,0,0,.32);
+  }
+  .btn .arrow{
+    font-size:18px;
+    margin-left:14px;
+    transition:transform .18s ease;
+  }
+  .btn:hover .arrow{ transform:translateX(4px); }
+  .btn:focus-visible{
+    outline:3px solid var(--highlight);
+    outline-offset:3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .scroll-cue::after{ animation:none; }
+    .btn{ transition:none; }
+  }
+
+  .btn.primary{
+    background:linear-gradient(120deg,#ffd93d,#ff9d6c);
+    color:#2a1c00;
+  }
+
+  /* ============ FOOTER ============ */
+  footer{
+    background:#07171d;
+    color:#7f9a97;
+    text-align:center;
+    padding:32px 24px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+  }
+  footer span{color:#c9dedb;}
+
+  /* ============ MOBILE ============ */
+  .mobile-collage{ display:none; }
+  .mobile-logo{ display:none; }
+
+  @media (max-width: 900px){
+    .orbit{ display:none; }
+    .mobile-collage{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+      width:100%;
+      max-width:520px;
+      margin-bottom:30px;
+    }
+    .mobile-collage .polaroid{
+      position:static;
+      width:100%;
+      transform:none !important;
+      padding:6px 6px 22px;
+    }
+    .mobile-collage .polaroid .tag{ font-size:8.5px; bottom:6px; left:6px; right:6px;}
+    .mobile-logo{ display:block; width:220px; margin:0 auto 30px; }
+    .hero{ padding-top:44px; }
+    .cta-section{ padding:80px 20px 64px; }
+    .note{ transform:rotate(-1.5deg); width:100%; max-width:320px;}
+    .btn-stack{ width:100%; max-width:320px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="eyebrow">MOCIU · edição 2026</div>
+
+  <!-- Desktop orbit collage -->
+  <div class="orbit">
+    <div class="orbit-rings" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <ellipse cx="200" cy="200" rx="195" ry="90" fill="none" stroke="var(--logo-blue)" stroke-width="1" stroke-dasharray="4 7" transform="rotate(-18 200 200)"/>
+        <ellipse cx="200" cy="200" rx="195" ry="90" fill="none" stroke="var(--logo-green)" stroke-width="1" stroke-dasharray="4 7" transform="rotate(18 200 200)"/>
+        <ellipse cx="200" cy="200" rx="195" ry="90" fill="none" stroke="var(--logo-red)" stroke-width="1" stroke-dasharray="4 7" transform="rotate(90 200 200)"/>
+      </svg>
+    </div>
+
+    <img class="logo-center" src="images/logo-mociu.png" alt="MOCIU — Mostra de Ciências de Umuarama">
+
+    <figure class="polaroid p1">
+      <img src="images/student-ifcode.jpg" alt="Estudante apresentando o projeto IF Code">
+      <figcaption class="tag">if_code.jpg</figcaption>
+    </figure>
+    <figure class="polaroid p2">
+      <img src="images/team-house.jpg" alt="Dupla apresentando projeto sobre ecoargamassa">
+      <figcaption class="tag">ecoargamassa.jpg</figcaption>
+    </figure>
+    <figure class="polaroid p3">
+      <img src="images/team-magneto.jpg" alt="Dupla ao lado do pôster do projeto Magneto">
+      <figcaption class="tag">magneto.jpg</figcaption>
+    </figure>
+    <figure class="polaroid p4">
+      <img src="images/student-blockchain.jpg" alt="Estudante apresentando projeto sobre blockchain">
+      <figcaption class="tag">coin_if.jpg</figcaption>
+    </figure>
+    <figure class="polaroid p5">
+      <img src="images/team-repository.jpg" alt="Dupla apresentando repositório digital de projetos">
+      <figcaption class="tag">repositorio.jpg</figcaption>
+    </figure>
+    <figure class="polaroid p6">
+      <img src="images/team-crypto.jpg" alt="Dupla apresentando projeto sobre criptomoedas na educação">
+      <figcaption class="tag">cripto_edu.jpg</figcaption>
+    </figure>
+  </div>
+
+  <!-- Mobile collage -->
+  <div class="mobile-collage">
+    <figure class="polaroid"><img src="images/student-ifcode.jpg" alt="Estudante apresentando o projeto IF Code"><figcaption class="tag">if_code.jpg</figcaption></figure>
+    <figure class="polaroid"><img src="images/team-house.jpg" alt="Dupla apresentando projeto sobre ecoargamassa"><figcaption class="tag">ecoargamassa.jpg</figcaption></figure>
+    <figure class="polaroid"><img src="images/team-magneto.jpg" alt="Dupla ao lado do pôster do projeto Magneto"><figcaption class="tag">magneto.jpg</figcaption></figure>
+    <figure class="polaroid"><img src="images/student-blockchain.jpg" alt="Estudante apresentando projeto sobre blockchain"><figcaption class="tag">coin_if.jpg</figcaption></figure>
+    <figure class="polaroid"><img src="images/team-repository.jpg" alt="Dupla apresentando repositório digital de projetos"><figcaption class="tag">repositorio.jpg</figcaption></figure>
+    <figure class="polaroid"><img src="images/team-crypto.jpg" alt="Dupla apresentando projeto sobre criptomoedas na educação"><figcaption class="tag">cripto_edu.jpg</figcaption></figure>
+  </div>
+  <img class="mobile-logo" src="images/logo-mociu.png" alt="MOCIU — Mostra de Ciências de Umuarama">
+
+  <div class="headline-wrap">
+    <p class="headline">em 2026, totalmente <span class="online">online</span></p>
+    <p class="hero-sub">2ª Mostra de Ciências de Umuarama · Instituto Federal do Paraná</p>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"></div>
+</section>
+
+<!-- ============ CTA / AURORA ============ -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="graffiti">Sua inovação merece palco...</h2>
+
+    <p class="cta-copy">
+      Inscreva seu trabalho na <strong>Mostra de Ciências de Umuarama 2026</strong> e compartilhe seus resultados com estudantes de todo o Brasil.
+      <span class="line2">Participe individualmente ou em equipes de até 3 pessoas — nessa edição, 100% online.</span>
+    </p>
+
+    <div class="cta-row">
+      <div class="note">
+        <div class="note-top">
+          <span>📝 Notas</span>
+          <span>⋯</span>
+        </div>
+        <span class="note-flag">Atenção</span>
+        <p>Leia e siga o template com atenção para não correr o risco de ficar de fora da avaliação.</p>
+      </div>
+
+      <div class="btn-stack">
+        <a href="#" class="btn primary">Baixar o template do projeto <span class="arrow">→</span></a>
+        <a href="#" class="btn">Fazer minha inscrição <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  MOCIU — Mostra de Ciências de Umuarama <span>·</span> Instituto Federal do Paraná, Campus Umuarama
+</footer>
+
+</body>
+</html>
