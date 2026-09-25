@@ -130,6 +130,7 @@
     border-radius:8px;
     text-decoration:none;
     box-shadow:0 6px 16px rgba(63,207,142,.3);
+    transition: background 0.2s;
   }
   .btn-download-cert:hover{
     background:#34b077;
@@ -157,7 +158,7 @@
 
   <div class="card-box">
     <h1>Emissão de Certificados</h1>
-    <p class="desc">Digite seu nome para localizar e baixar seu certificado da MOCIU 2026. Nosso sistema corrige automaticamente pequenos erros de digitação ou falta de acentos.</p>
+    <p class="desc">Digite seu nome para localizar seu certificado da MOCIU 2026. O sistema corrige automaticamente pequenos erros de digitação.</p>
 
     <div class="input-group">
       <label for="studentName">Nome do Estudante:</label>
@@ -168,7 +169,8 @@
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">⬇️ Baixar Certificado em PDF</a>
+      <!-- Aberto em nova aba de forma segura -->
+      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
@@ -182,7 +184,6 @@
 </footer>
 
 <script>
-  // Lista com todos os nomes oficiais exatamente como estão nos nomes dos arquivos PDF
   const estudantes = [
     "Ana Luiza Corsini de Souza", "Antônio João de Lima Ferroni", "Carlos Eduardo de Oliveira Gabiatti", 
     "Cibele Sophia de Souza Novaes Brito", "Clara Fernandes", "Claudinei Freitas de Oliveira Junior", 
@@ -206,16 +207,14 @@
     "Sophia Volpato Pires", "Yasmim Ferreira de Sousa"
   ];
 
-  // Configuração da biblioteca Fuse.js para tolerar erros e acentos (fuzzy match)
   const options = {
     includeScore: true,
-    threshold: 0.4, // Nível de tolerância para erros (0.0 é exato, 1.0 acha qualquer coisa)
+    threshold: 0.4,
     ignoreLocation: true,
     ignoreFieldNorm: true
   };
   const fuse = new Fuse(estudantes, options);
 
-  // Executa busca com Enter
   document.getElementById('studentName').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       buscarCertificado();
@@ -237,23 +236,17 @@
       return;
     }
 
-    // Busca o nome mais parecido na lista
     const result = fuse.search(inputVal);
 
     if(result.length > 0) {
-      const nomeEncontrado = result[0].item; // Pega a melhor correspondência (o nome oficial)
-      
-      // Monta o nome do arquivo exatamente como ele existe na pasta 'certificados'
+      const nomeEncontrado = result[0].item;
       const nomeArquivo = `Certificado - ${nomeEncontrado}.pdf`;
-      
-      // Caminho relativo da pasta hospedada no GitHub Pages
       const urlCertificado = `certificados/${encodeURIComponent(nomeArquivo)}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
       
-      // Configura link de download e força ação de baixar
+      // Aponta para o arquivo codificado de forma limpa na pasta do site
       downloadLink.href = urlCertificado;
-      downloadLink.setAttribute('download', nomeArquivo); 
       
       resultArea.style.display = 'block';
     } else {
