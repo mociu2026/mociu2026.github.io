@@ -131,7 +131,6 @@
     line-height:1.4;
   }
 
-  /* Novo layout organizado de informações */
   .pod-info{
     display:flex;
     flex-direction:column;
@@ -163,9 +162,10 @@
     color:#2b3e4a;
   }
 
+  /* Moldura Otimizada para Rostos */
   .photo-frame{
     width: 100%;
-    height: 190px;
+    height: 200px; /* Um pouco mais alta para dar espaço aos rostos */
     background: #e9ecef;
     border-radius: 8px;
     overflow: hidden;
@@ -173,14 +173,21 @@
     align-items: center;
     justify-content: center;
     margin-top: auto;
-    border: 1px solid rgba(0,0,0,.05);
+    border: 1px solid rgba(0,0,0,.08);
   }
   
+  /* Otimização inteligente: foca sempre na porção superior/central onde ficam os rostos */
   .photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 25%;
+    object-position: center 22%; /* Posicionamento ideal para evitar corte de cabeças */
+    transition: transform 0.3s ease;
+  }
+
+  /* Efeito elegante de zoom ao passar o mouse na foto */
+  .photo-frame:hover img {
+    transform: scale(1.05);
   }
 
   .photo-frame.pending {
@@ -316,7 +323,6 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ruty A. da Silva, Sophia V. Pires</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
       </div>
-      <!-- ATUALIZADO: FOTO DA MASSA.JPEG AQUI -->
       <div class="photo-frame"><img src="fotos/massa.jpeg" alt="Equipe ECOARGAMASSA"></div>
     </div>
 
@@ -428,7 +434,6 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza de Oliveira Carvalho</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle Giovanna do Couto de Oliveira</span></div>
       </div>
-      <!-- ATUALIZADO: DADOS E FOTO DA ANA LUIZA AQUI -->
       <div class="photo-frame"><img src="fotos/9795291e-7e02-498b-925b-c48e3f50fa4c - Ana Luiza de Oliveira Car....jpeg" alt="Equipe BioCopper"></div>
     </div>
 
