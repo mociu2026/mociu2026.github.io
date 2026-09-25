@@ -6,6 +6,9 @@
 <title>Emissão de Certificados — MOCIU 2026</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<!-- Incluindo a biblioteca Fuse.js para tolerar erros de digitação e acentos -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+
 <style>
   :root{
     --bg-top:#070C1E;
@@ -154,10 +157,10 @@
 
   <div class="card-box">
     <h1>Emissão de Certificados</h1>
-    <p class="desc">Digite seu nome completo exatamente como cadastrado no projeto para localizar e baixar seu certificado da MOCIU 2026.</p>
+    <p class="desc">Digite seu nome para localizar e baixar seu certificado da MOCIU 2026. Nosso sistema corrige automaticamente pequenos erros de digitação ou falta de acentos.</p>
 
     <div class="input-group">
-      <label for="studentName">Nome Completo do Estudante:</label>
+      <label for="studentName">Nome do Estudante:</label>
       <input type="text" id="studentName" placeholder="Ex: Ana Luiza Corsini de Souza">
     </div>
 
@@ -169,7 +172,7 @@
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
-      Nenhum certificado encontrado para este nome. Verifique se há erros de digitação ou se utilizou o nome completo cadastrado.
+      Nenhum certificado encontrado. Verifique se o nome digitado está próximo do cadastrado.
     </div>
   </div>
 </div>
@@ -179,75 +182,48 @@
 </footer>
 
 <script>
-  // Base de dados com os nomes cadastrados e links diretos correspondentes no Drive
-  const certificadosDB = {
-    "ana luiza corsini de souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "antônio joão de lima ferroni": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "carlos eduardo de oliveira gabiatti": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "cibele sophia de souza novaes brito": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "clara fernandes": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "claudinei freitas de oliveira junior": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "débora ribeiro de jesus": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "evaldo de matos vieira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "emilly de oliveira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "emmanuel juliano": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "esther aragão da rocha passos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "felipe da silva bernardino": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "gabriel martins monteiro": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "gabriel dos santos costa": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "gabrielly moreira de souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "giselle santos souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "helena gabrieli costa rodrigues": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "heloísa marcelino de moraes": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "hemiliesley malheiro cardoso da silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "inglithi novais ribeiro": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isaac vasconcelos ferreira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isabeli albanezi lino": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isabella ribeiro de souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isabella sayuri sakata": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isabelli vitória pirichowski silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isabelly micaela de souza barbosa": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "isla rebeca dos santos lira silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "jennefer santos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "jhenifer raiane silva lima": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "jorge davi guedes cavalcante": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "jovito gonçalves dos santos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "joão gabriel dias pereira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "joão victor ribeiro bizarri": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "kaio dos santos silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "lthaís silva moreira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "laura sophie marques de lima silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "lavínia vizetti helbel": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "luís henrique de souza almeida": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "maria clara garcia arantes": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "maria clara de lima sardinha": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "maria clara de souza de silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "maria isabella santana santos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "matheus henrique de mello prado": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "maísa guezzo cardoso": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "melissa maia": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "miguel antônio bertolini luzia": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "miguel isac alves": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "miguel neves pereira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "mylena camiloti": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "nícolas de souza caparelli": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "otavio da gama granville": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "pedro henrique barreto germano": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "pedro henrique stulpen vieira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "quezia bastos novais": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "rebeca vitória pereira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "renata cabrera": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "ruty almeida da silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "samira lopes cordeiro": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "sofia ribeiro cardoso ogando fraiz": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "sophia helena appolinário lhamas": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "sophia pereira ferrari": "https://docs.google.com/uc_export=download&id=SEU_FILE_ID_AQUI",
-    "sophia volpato pires": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
-    "yasmim ferreira de sousa": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI"
+  // Lista com todos os nomes oficiais exatamente como estão nos nomes dos arquivos PDF
+  const estudantes = [
+    "Ana Luiza Corsini de Souza", "Antônio João de Lima Ferroni", "Carlos Eduardo de Oliveira Gabiatti", 
+    "Cibele Sophia de Souza Novaes Brito", "Clara Fernandes", "Claudinei Freitas de Oliveira Junior", 
+    "Débora Ribeiro de jesus", "EVALDO DE MATOS VIEIRA", "Emilly de Oliveira", "Emmanuel Juliano", 
+    "Esther Aragão da Rocha Passos", "Felipe da Silva Bernardino", "Gabriel Martins Monteiro", 
+    "Gabriel dos Santos Costa", "Gabrielly Moreira de Souza", "Giselle Santos Souza", 
+    "Helena Gabrieli costa Rodrigues", "Heloísa Marcelino de Moraes", "Hemiliesley Malheiro Cardoso da Silva", 
+    "Inglithi Novais Ribeiro", "Isaac Vasconcelos Ferreira", "Isabeli Albanezi Lino", 
+    "Isabella Ribeiro de Souza", "Isabella Sayuri Sakata", "Isabelli Vitória Pirichowski Silva", 
+    "Isabelly Micaela de Souza Barbosa", "Isla Rebeca dos Santos Lira Silva", "Jennefer Santos", 
+    "Jhenifer Raiane Silva Lima", "Jorge Davi Guedes Cavalcante", "Jovito Gonçalves dos Santos", 
+    "João Gabriel Dias Pereira", "João Victor Ribeiro Bizarri", "Kaio dos Santos Silva", 
+    "LThaís Silva Moreira", "Laura Sophie Marques de Lima Silva", "Lavínia Vizetti Helbel", 
+    "Luís Henrique de Souza Almeida", "Maria Clara Garcia Arantes", "Maria Clara de Lima Sardinha", 
+    "Maria Clara de Souza de Silva", "Maria Isabella Santana santos", "Matheus Henrique de Mello Prado", 
+    "Maísa Guezzo Cardoso", "Melissa Maia", "Miguel Antônio Bertolini Luzia", "Miguel Isac Alves", 
+    "Miguel Neves Pereira", "Mylena Camiloti", "Nícolas de Souza Caparelli", "Otavio da Gama Granville", 
+    "Pedro Henrique Barreto Germano", "Pedro Henrique Stulpen Vieira", "Quezia Bastos Novais", 
+    "Rebeca Vitória Pereira", "Renata Cabrera", "Ruty Almeida da Silva", "Samira Lopes Cordeiro", 
+    "Sofia Ribeiro Cardoso Ogando Fraiz", "Sophia Helena Appolinário Lhamas", "Sophia Pereira Ferrari", 
+    "Sophia Volpato Pires", "Yasmim Ferreira de Sousa"
+  ];
+
+  // Configuração da biblioteca Fuse.js para tolerar erros e acentos (fuzzy match)
+  const options = {
+    includeScore: true,
+    threshold: 0.4, // Nível de tolerância para erros (0.0 é exato, 1.0 acha qualquer coisa)
+    ignoreLocation: true,
+    ignoreFieldNorm: true
   };
+  const fuse = new Fuse(estudantes, options);
+
+  // Executa busca com Enter
+  document.getElementById('studentName').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      buscarCertificado();
+    }
+  });
 
   function buscarCertificado() {
-    const inputVal = document.getElementById('studentName').value.trim().toLowerCase();
+    const inputVal = document.getElementById('studentName').value.trim();
     const resultArea = document.getElementById('resultArea');
     const errorArea = document.getElementById('errorArea');
     const successText = document.getElementById('successText');
@@ -257,13 +233,28 @@
     resultArea.style.display = 'none';
 
     if(!inputVal) {
-      alert('Por favor, digite o seu nome completo.');
+      alert('Por favor, digite o nome do estudante.');
       return;
     }
 
-    if(certificadosDB[inputVal]) {
-      successText.innerText = "Certificado localizado com sucesso para: " + document.getElementById('studentName').value;
-      downloadLink.href = certificadosDB[inputVal];
+    // Busca o nome mais parecido na lista
+    const result = fuse.search(inputVal);
+
+    if(result.length > 0) {
+      const nomeEncontrado = result[0].item; // Pega a melhor correspondência (o nome oficial)
+      
+      // Monta o nome do arquivo exatamente como ele existe na pasta 'certificados'
+      const nomeArquivo = `Certificado - ${nomeEncontrado}.pdf`;
+      
+      // Caminho relativo da pasta hospedada no GitHub Pages
+      const urlCertificado = `certificados/${encodeURIComponent(nomeArquivo)}`;
+
+      successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
+      
+      // Configura link de download e força ação de baixar
+      downloadLink.href = urlCertificado;
+      downloadLink.setAttribute('download', nomeArquivo); 
+      
       resultArea.style.display = 'block';
     } else {
       errorArea.style.display = 'block';
