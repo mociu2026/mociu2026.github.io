@@ -73,7 +73,7 @@
   .grid-pods{
     display:grid;
     grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-    gap:20px;
+    gap:24px; /* Aumentei o espaçamento entre os cards */
     margin-bottom:40px;
   }
 
@@ -83,30 +83,31 @@
     padding:24px;
     box-shadow:0 12px 30px rgba(19,42,54,.15);
     position:relative;
-    overflow:hidden;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
   }
 
-  .pod-card.gold{border-top:5px solid var(--gold);}
-  .pod-card.silver{border-top:5px solid var(--silver);}
-  .pod-card.bronze{border-top:5px solid var(--bronze);}
+  .pod-card.gold{border-top:6px solid var(--gold);}
+  .pod-card.silver{border-top:6px solid var(--silver);}
+  .pod-card.bronze{border-top:6px solid var(--bronze);}
   .pod-card.champion{
-    border:2px solid var(--gold);
+    border:3px solid var(--gold);
     background:linear-gradient(135deg, #fffdf7 0%, #fef3c7 100%);
   }
 
   .badge{
     position:absolute;
-    top:16px; right:16px;
+    top:16px; 
+    right:16px;
     font-family:'Space Mono',monospace;
     font-size:11px;
     font-weight:700;
-    padding:4px 10px;
+    padding:6px 12px;
     border-radius:20px;
     text-transform:uppercase;
     z-index:2;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
   }
   .gold-badge{background:var(--gold); color:#132a36;}
   .silver-badge{background:var(--silver); color:#132a36;}
@@ -114,16 +115,18 @@
 
   .pod-title{
     font-family:'Fraunces',serif;
-    font-size:18px;
+    font-size:20px; /* Fonte levemente maior */
     font-weight:700;
     color:var(--ink);
     margin-bottom:8px;
-    padding-right:60px;
+    /* Isso impede que o texto sobreponha a badge no canto superior direito */
+    padding-right:90px; 
+    line-height:1.2;
   }
 
   .pod-work{
     font-size:15px;
-    font-weight:600;
+    font-weight:700;
     color:var(--logo-teal);
     margin-bottom:12px;
   }
@@ -131,12 +134,12 @@
   .pod-authors{
     font-size:13.5px;
     color:var(--ink-soft);
-    margin-bottom:16px;
+    margin-bottom:20px; /* Mais respiro antes da foto */
   }
 
   .photo-frame{
     width: 100%;
-    height: 180px;
+    height: 180px; /* Altura fixa para manter todos os cards iguais */
     background: #e9ecef;
     border-radius: 8px;
     overflow: hidden;
@@ -144,6 +147,7 @@
     align-items: center;
     justify-content: center;
     margin-top: auto;
+    border: 1px solid rgba(0,0,0,.05);
   }
   .photo-frame img {
     width: 100%;
@@ -157,7 +161,8 @@
     border: 2px dashed rgba(0,0,0,.15);
     color: #8a8574;
     font-family: 'Space Mono', monospace;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 700;
     flex-direction: column;
   }
 
@@ -190,7 +195,7 @@
         <div class="pod-authors"><strong>Autores:</strong> Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira<br><strong>Orientador(a):</strong> Andreza C. Soares</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1jdPGoafDDHUOIHhA5BUNHvHMNrlwo2Y-&sz=w1000" alt="Equipe ECOBUILD">
+        <img src="fotos/ecobuild.jpg" alt="Equipe ECOBUILD">
       </div>
     </div>
 
@@ -202,7 +207,7 @@
         <div class="pod-authors"><strong>Autores:</strong> João Victor R. Bizarri, Renata Cabrera<br><strong>Orientador(a):</strong> Giselle G. C. de Oliveira</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1EnFVksspxkHB-E1aZ4-g8AXNJlRad7n4&sz=w1000" alt="Equipe MAGNETO">
+        <img src="fotos/magneto.jpg" alt="Equipe MAGNETO">
       </div>
     </div>
 
@@ -214,7 +219,7 @@
         <div class="pod-authors"><strong>Autores:</strong> Isabella R. de Souza, Mylena Camiloti<br><strong>Orientador(a):</strong> Andreza C. Soares</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1drMx-bQAtUDxzXAXVlr4WFDb7buvbcdz&sz=w1000" alt="Equipe POLITINTA">
+        <img src="fotos/politinta.jpg" alt="Equipe POLITINTA">
       </div>
     </div>
   </div>
@@ -231,7 +236,7 @@
         <div class="pod-authors">Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira / Andreza C. Soares</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1jdPGoafDDHUOIHhA5BUNHvHMNrlwo2Y-&sz=w1000" alt="Equipe ECOBUILD">
+        <img src="fotos/ecobuild.jpg" alt="Equipe ECOBUILD">
       </div>
     </div>
     <div class="pod-card silver">
@@ -251,7 +256,7 @@
         <div class="pod-authors">Isabelli V. P. Silva / Eduardo V. Santos</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1iOsyHzrDUlROhCPRa0DSXoMepN2jHK_A&sz=w1000" alt="Equipe ECOBLOCO PET">
+        <img src="fotos/ecobloco_pet.jpg" alt="Equipe ECOBLOCO PET">
       </div>
     </div>
 
@@ -264,7 +269,7 @@
         <div class="pod-authors">Jhenifer R. S. Lima, Claudinei F. O. Junior, Pedro H. B. Germano / Giselle G. C. de Oliveira</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=16N3FfAhGAir-o5fLrOLAhUEi1YdO3A_Q&sz=w1000" alt="Equipe SMART FILME">
+        <img src="fotos/smart_filme.jpg" alt="Equipe SMART FILME">
       </div>
     </div>
     <div class="pod-card silver">
@@ -275,7 +280,7 @@
         <div class="pod-authors">Sophia H. A. Lhamas, Gabriel M. Monteiro / Andreza C. Soares</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1SP4EyQ925Y3xazYr7YCi-7QxJslxo2Ao&sz=w1000" alt="Equipe Tubecoffee">
+        <img src="fotos/tubecoffee.jpg" alt="Equipe Tubecoffee">
       </div>
     </div>
     <div class="pod-card bronze">
@@ -286,7 +291,7 @@
         <div class="pod-authors">Jennefer Santos, Yasmim F. de Sousa / Nadja C. da Silva</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1SA5oOHmlh7isConFBwtj6v9P0k4zvixO&sz=w1000" alt="Equipe Tapioca">
+        <img src="fotos/tapioca.jpg" alt="Equipe Tapioca">
       </div>
     </div>
 
@@ -299,7 +304,7 @@
         <div class="pod-authors">Isabella R. de Souza, Mylena Camiloti / Andreza C. Soares</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1drMx-bQAtUDxzXAXVlr4WFDb7buvbcdz&sz=w1000" alt="Equipe POLITINTA">
+        <img src="fotos/politinta.jpg" alt="Equipe POLITINTA">
       </div>
     </div>
     <div class="pod-card silver">
@@ -319,7 +324,7 @@
         <div class="pod-authors">Isabella S. Sakata, Maísa G. Cardoso / Giselle G. C. de Oliveira</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1ruDl0qGqe3ZhhxTHlV7FkDqYUMBFWk9X&sz=w1000" alt="Equipe Neuro Trema">
+        <img src="fotos/neuro_trema.jpg" alt="Equipe Neuro Trema">
       </div>
     </div>
 
@@ -332,7 +337,7 @@
         <div class="pod-authors">João Victor R. Bizarri, Renata Cabrera / Giselle G. C. de Oliveira</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1EnFVksspxkHB-E1aZ4-g8AXNJlRad7n4&sz=w1000" alt="Equipe MAGNETO">
+        <img src="fotos/magneto.jpg" alt="Equipe MAGNETO">
       </div>
     </div>
     <div class="pod-card silver">
@@ -343,7 +348,7 @@
         <div class="pod-authors">[Autores Editáveis] / [Orientador Editável]</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1OuAWAejkEwW9EGZPloKK1yxu1GysCQ9E&sz=w1000" alt="Equipe BioCopper">
+        <img src="fotos/biocopper.jpg" alt="Equipe BioCopper">
       </div>
     </div>
     <div class="pod-card bronze">
@@ -354,7 +359,7 @@
         <div class="pod-authors">Heloísa M. de Moraes, Isla R. S. L. Silva, Melissa Maia / Andreza C. Soares</div>
       </div>
       <div class="photo-frame">
-        <img src="https://drive.google.com/thumbnail?id=1wxlDTc55nkbpuyr2pAQwYvIN4HsAxpXA&sz=w1000" alt="Equipe E.P.C.">
+        <img src="fotos/epc.jpg" alt="Equipe E.P.C.">
       </div>
     </div>
   </div>
