@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emissão de Certificados — MOCIU 2026</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-top:#070C1E;
+    --bg-bot:#101934;
+    --card-bg:#162247;
+    --ink:#fbf6ea;
+    --ink-soft:#c9dedb;
+    --highlight:#ffd93d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--bg-top);
+    padding:40px 20px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .container{
+    max-width:680px;
+    margin:0 auto;
+    width:100%;
+  }
+  .back-link{
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    color:var(--highlight);
+    text-decoration:none;
+    margin-bottom:24px;
+    font-weight:700;
+  }
+  .back-link:hover{text-decoration:underline;}
+
+  .card-box{
+    background:var(--card-bg);
+    border-radius:16px;
+    padding:40px;
+    box-shadow:0 16px 40px rgba(0,0,0,.5);
+    border:1px solid rgba(255,255,255,.1);
+    text-align:center;
+  }
+
+  h1{
+    font-family:'Fraunces',serif;
+    font-size:clamp(26px, 4vw, 34px);
+    color:var(--ink);
+    margin-bottom:12px;
+  }
+  p.desc{
+    font-size:15px;
+    color:var(--ink-soft);
+    margin-bottom:32px;
+  }
+
+  .input-group{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    text-align:left;
+    margin-bottom:24px;
+  }
+  label{
+    font-family:'Space Mono',monospace;
+    font-size:13px;
+    color:var(--highlight);
+  }
+  input[type="text"]{
+    width:100%;
+    padding:16px 20px;
+    background:rgba(0,0,0,.3);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:10px;
+    color:var(--ink);
+    font-size:16px;
+    outline:none;
+    transition:border-color .2s;
+  }
+  input[type="text"]:focus{
+    border-color:var(--highlight);
+  }
+
+  .btn-search{
+    width:100%;
+    background:linear-gradient(120deg,#ffd93d,#ff9d6c);
+    color:#132a36;
+    font-weight:700;
+    font-size:16px;
+    padding:16px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
+    transition:transform .15s ease;
+  }
+  .btn-search:hover{
+    transform:translateY(-2px);
+  }
+
+  #resultArea{
+    margin-top:30px;
+    display:none;
+    padding:24px;
+    background:rgba(0,0,0,.2);
+    border-radius:10px;
+    border:1px dashed var(--highlight);
+    text-align:center;
+  }
+
+  .btn-download-cert{
+    display:inline-block;
+    margin-top:16px;
+    background:#3fcf8e;
+    color:#070C1E;
+    font-weight:700;
+    padding:14px 28px;
+    border-radius:8px;
+    text-decoration:none;
+    box-shadow:0 6px 16px rgba(63,207,142,.3);
+  }
+  .btn-download-cert:hover{
+    background:#34b077;
+  }
+
+  .error-msg{
+    color:#ff6b6b;
+    font-family:'Space Mono',monospace;
+    font-size:14px;
+    margin-top:16px;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:40px;
+    font-family:'Space Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← Voltar para a Página Inicial</a>
+
+  <div class="card-box">
+    <h1>Emissão de Certificados</h1>
+    <p class="desc">Digite seu nome completo exatamente como cadastrado no projeto para localizar e baixar seu certificado da MOCIU 2026.</p>
+
+    <div class="input-group">
+      <label for="studentName">Nome Completo do Estudante:</label>
+      <input type="text" id="studentName" placeholder="Ex: Ana Luiza Corsini de Souza">
+    </div>
+
+    <button class="btn-search" onclick="buscarCertificado()">Consultar Certificado</button>
+
+    <div id="resultArea">
+      <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
+      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">⬇️ Baixar Certificado em PDF</a>
+    </div>
+
+    <div id="errorArea" class="error-msg" style="display:none;">
+      Nenhum certificado encontrado para este nome. Verifique se há erros de digitação ou se utilizou o nome completo cadastrado.
+    </div>
+  </div>
+</div>
+
+<footer>
+  MOCIU — Mostra de Ciências de Umuarama 2026 · Instituto Federal do Paraná
+</footer>
+
+<script>
+  // Base de dados com os nomes cadastrados e links diretos correspondentes no Drive
+  const certificadosDB = {
+    "ana luiza corsini de souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "antônio joão de lima ferroni": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "carlos eduardo de oliveira gabiatti": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "cibele sophia de souza novaes brito": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "clara fernandes": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "claudinei freitas de oliveira junior": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "débora ribeiro de jesus": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "evaldo de matos vieira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "emilly de oliveira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "emmanuel juliano": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "esther aragão da rocha passos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "felipe da silva bernardino": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "gabriel martins monteiro": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "gabriel dos santos costa": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "gabrielly moreira de souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "giselle santos souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "helena gabrieli costa rodrigues": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "heloísa marcelino de moraes": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "hemiliesley malheiro cardoso da silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "inglithi novais ribeiro": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isaac vasconcelos ferreira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isabeli albanezi lino": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isabella ribeiro de souza": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isabella sayuri sakata": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isabelli vitória pirichowski silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isabelly micaela de souza barbosa": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "isla rebeca dos santos lira silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "jennefer santos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "jhenifer raiane silva lima": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "jorge davi guedes cavalcante": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "jovito gonçalves dos santos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "joão gabriel dias pereira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "joão victor ribeiro bizarri": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "kaio dos santos silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "lthaís silva moreira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "laura sophie marques de lima silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "lavínia vizetti helbel": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "luís henrique de souza almeida": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "maria clara garcia arantes": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "maria clara de lima sardinha": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "maria clara de souza de silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "maria isabella santana santos": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "matheus henrique de mello prado": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "maísa guezzo cardoso": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "melissa maia": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "miguel antônio bertolini luzia": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "miguel isac alves": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "miguel neves pereira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "mylena camiloti": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "nícolas de souza caparelli": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "otavio da gama granville": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "pedro henrique barreto germano": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "pedro henrique stulpen vieira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "quezia bastos novais": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "rebeca vitória pereira": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "renata cabrera": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "ruty almeida da silva": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "samira lopes cordeiro": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "sofia ribeiro cardoso ogando fraiz": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "sophia helena appolinário lhamas": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "sophia pereira ferrari": "https://docs.google.com/uc_export=download&id=SEU_FILE_ID_AQUI",
+    "sophia volpato pires": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI",
+    "yasmim ferreira de sousa": "https://docs.google.com/uc?export=download&id=SEU_FILE_ID_AQUI"
+  };
+
+  function buscarCertificado() {
+    const inputVal = document.getElementById('studentName').value.trim().toLowerCase();
+    const resultArea = document.getElementById('resultArea');
+    const errorArea = document.getElementById('errorArea');
+    const successText = document.getElementById('successText');
+    const downloadLink = document.getElementById('downloadLink');
+
+    errorArea.style.display = 'none';
+    resultArea.style.display = 'none';
+
+    if(!inputVal) {
+      alert('Por favor, digite o seu nome completo.');
+      return;
+    }
+
+    if(certificadosDB[inputVal]) {
+      successText.innerText = "Certificado localizado com sucesso para: " + document.getElementById('studentName').value;
+      downloadLink.href = certificadosDB[inputVal];
+      resultArea.style.display = 'block';
+    } else {
+      errorArea.style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
