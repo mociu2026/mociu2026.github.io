@@ -8,15 +8,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg-top:#070C1E;
-    --bg-bot:#101934;
-    --card-bg:#162247;
-    --ink:#fbf6ea;
-    --ink-soft:#c9dedb;
-    --gold:#e2a836;
+    --bg-top:#eaf4fb;
+    --bg-bot:#8fbfe3;
+    --card-bg:#fffdf7;
+    --ink:#132a36;
+    --ink-soft:#3c5566;
+    --gold:#d4af37;
     --silver:#94a3b8;
     --bronze:#b45309;
     --highlight:#ffd93d;
+    --logo-teal:#1f7d78;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{
@@ -34,7 +35,7 @@
     display:inline-block;
     font-family:'Space Mono',monospace;
     font-size:13px;
-    color:var(--highlight);
+    color:var(--logo-teal);
     text-decoration:none;
     margin-bottom:24px;
     font-weight:700;
@@ -60,9 +61,9 @@
   .section-title{
     font-family:'Fraunces',serif;
     font-size:24px;
-    color:var(--highlight);
+    color:var(--ink);
     margin:40px 0 20px;
-    border-bottom:2px solid rgba(255,217,61,.2);
+    border-bottom:2px solid rgba(0,0,0,.08);
     padding-bottom:8px;
     display:flex;
     align-items:center;
@@ -80,8 +81,7 @@
     background:var(--card-bg);
     border-radius:12px;
     padding:24px;
-    box-shadow:0 12px 30px rgba(0,0,0,.4);
-    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 12px 30px rgba(19,42,54,.15);
     position:relative;
     overflow:hidden;
     display:flex;
@@ -94,7 +94,7 @@
   .pod-card.bronze{border-top:5px solid var(--bronze);}
   .pod-card.champion{
     border:2px solid var(--gold);
-    background:linear-gradient(135deg, #162247 0%, #22356c 100%);
+    background:linear-gradient(135deg, #fffdf7 0%, #fef3c7 100%);
   }
 
   .badge{
@@ -123,7 +123,7 @@
   .pod-work{
     font-size:15px;
     font-weight:600;
-    color:var(--highlight);
+    color:var(--logo-teal);
     margin-bottom:12px;
   }
 
@@ -134,14 +134,30 @@
   }
 
   .photo-frame{
-    background:rgba(0,0,0,.25);
-    border:2px dashed rgba(255,255,255,.2);
-    border-radius:8px;
-    padding:14px;
-    text-align:center;
-    font-size:12px;
-    font-family:'Space Mono',monospace;
-    color:var(--ink-soft);
+    width: 100%;
+    height: 180px;
+    background: #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+
+  .photo-frame.pending {
+    background: rgba(0,0,0,.04);
+    border: 2px dashed rgba(0,0,0,.15);
+    color: #8a8574;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    flex-direction: column;
   }
 
   footer{
@@ -172,7 +188,9 @@
         <div class="pod-work">ECOBUILD (Fase II)</div>
         <div class="pod-authors"><strong>Autores:</strong> Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira<br><strong>Orientador(a):</strong> Andreza C. Soares</div>
       </div>
-      <div class="photo-frame">📷 Foto da Premiação (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1jdPGoafDDHUOIHhA5BUNHvHMNrlwo2Y-" alt="Equipe ECOBUILD">
+      </div>
     </div>
 
     <div class="pod-card silver">
@@ -182,7 +200,9 @@
         <div class="pod-work">MAGNETO (Fase II)</div>
         <div class="pod-authors"><strong>Autores:</strong> João Victor R. Bizarri, Renata Cabrera<br><strong>Orientador(a):</strong> Giselle G. C. de Oliveira</div>
       </div>
-      <div class="photo-frame">📷 Foto da Premiação (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1EnFVksspxkHB-E1aZ4-g8AXNJlRad7n4" alt="Equipe MAGNETO">
+      </div>
     </div>
 
     <div class="pod-card bronze">
@@ -192,7 +212,9 @@
         <div class="pod-work">POLITINTA (Fase II)</div>
         <div class="pod-authors"><strong>Autores:</strong> Isabella R. de Souza, Mylena Camiloti<br><strong>Orientador(a):</strong> Andreza C. Soares</div>
       </div>
-      <div class="photo-frame">📷 Foto da Premiação (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1drMx-bQAtUDxzXAXVlr4WFDb7buvbcdz" alt="Equipe POLITINTA">
+      </div>
     </div>
   </div>
 
@@ -207,7 +229,9 @@
         <div class="pod-work">ECOBUILD (Fase II)</div>
         <div class="pod-authors">Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira / Andreza C. Soares</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1jdPGoafDDHUOIHhA5BUNHvHMNrlwo2Y-" alt="Equipe ECOBUILD">
+      </div>
     </div>
     <div class="pod-card silver">
       <span class="badge silver-badge">2º Sala 1</span>
@@ -216,7 +240,7 @@
         <div class="pod-work">ECOARGAMASSA</div>
         <div class="pod-authors">Ruty A. da Silva, Sophia V. Pires / Giselle G. C. de Oliveira</div>
       </div>
-      <div class="photo-frame" style="border-color: #e2a836; color: #ffd93d;">⚠️ Foto Pendente</div>
+      <div class="photo-frame pending">⚠️ Foto Pendente</div>
     </div>
     <div class="pod-card bronze">
       <span class="badge bronze-badge">3º Sala 1</span>
@@ -225,7 +249,9 @@
         <div class="pod-work">ECOBLOCO PET</div>
         <div class="pod-authors">Isabelli V. P. Silva / Eduardo V. Santos</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1iOsyHzrDUlROhCPRa0DSXoMepN2jHK_A" alt="Equipe ECOBLOCO PET">
+      </div>
     </div>
 
     <!-- Sala 2 -->
@@ -236,7 +262,9 @@
         <div class="pod-work">SMART FILME</div>
         <div class="pod-authors">Jhenifer R. S. Lima, Claudinei F. O. Junior, Pedro H. B. Germano / Giselle G. C. de Oliveira</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=16N3FfAhGAir-o5fLrOLAhUEi1YdO3A_Q" alt="Equipe SMART FILME">
+      </div>
     </div>
     <div class="pod-card silver">
       <span class="badge silver-badge">2º Sala 2</span>
@@ -245,7 +273,9 @@
         <div class="pod-work">Tubecoffee (Fase II)</div>
         <div class="pod-authors">Sophia H. A. Lhamas, Gabriel M. Monteiro / Andreza C. Soares</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1SP4EyQ925Y3xazYr7YCi-7QxJslxo2Ao" alt="Equipe Tubecoffee">
+      </div>
     </div>
     <div class="pod-card bronze">
       <span class="badge bronze-badge">3º Sala 2</span>
@@ -254,7 +284,9 @@
         <div class="pod-work">Tapioca, Identidade e Território</div>
         <div class="pod-authors">Jennefer Santos, Yasmim F. de Sousa / Nadja C. da Silva</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1SA5oOHmlh7isConFBwtj6v9P0k4zvixO" alt="Equipe Tapioca">
+      </div>
     </div>
 
     <!-- Sala 3 -->
@@ -265,7 +297,9 @@
         <div class="pod-work">POLITINTA (Fase II)</div>
         <div class="pod-authors">Isabella R. de Souza, Mylena Camiloti / Andreza C. Soares</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1drMx-bQAtUDxzXAXVlr4WFDb7buvbcdz" alt="Equipe POLITINTA">
+      </div>
     </div>
     <div class="pod-card silver">
       <span class="badge silver-badge">2º Sala 3</span>
@@ -274,7 +308,7 @@
         <div class="pod-work">Doença de Chagas em Wagner-BA</div>
         <div class="pod-authors">Cibele S. S. N. Brito, Thaís S. Moreira, Hemiliesley M. C. Silva / Tiago O. Souza</div>
       </div>
-      <div class="photo-frame" style="border-color: #e2a836; color: #ffd93d;">⚠️ Foto Pendente</div>
+      <div class="photo-frame pending">⚠️ Foto Pendente</div>
     </div>
     <div class="pod-card bronze">
       <span class="badge bronze-badge">3º Sala 3</span>
@@ -283,7 +317,9 @@
         <div class="pod-work">Neuro Trema</div>
         <div class="pod-authors">Isabella S. Sakata, Maísa G. Cardoso / Giselle G. C. de Oliveira</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1ruDl0qGqe3ZhhxTHlV7FkDqYUMBFWk9X" alt="Equipe Neuro Trema">
+      </div>
     </div>
 
     <!-- Sala 4 -->
@@ -294,7 +330,9 @@
         <div class="pod-work">MAGNETO (Fase II)</div>
         <div class="pod-authors">João Victor R. Bizarri, Renata Cabrera / Giselle G. C. de Oliveira</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1EnFVksspxkHB-E1aZ4-g8AXNJlRad7n4" alt="Equipe MAGNETO">
+      </div>
     </div>
     <div class="pod-card silver">
       <span class="badge silver-badge">2º Sala 4</span>
@@ -303,7 +341,9 @@
         <div class="pod-work">BioCopper</div>
         <div class="pod-authors">[Autores Editáveis] / [Orientador Editável]</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1OuAWAejkEwW9EGZPloKK1yxu1GysCQ9E" alt="Equipe BioCopper">
+      </div>
     </div>
     <div class="pod-card bronze">
       <span class="badge bronze-badge">3º Sala 4</span>
@@ -312,7 +352,9 @@
         <div class="pod-work">E.P.C. (Acaricida - Fase II)</div>
         <div class="pod-authors">Heloísa M. de Moraes, Isla R. S. L. Silva, Melissa Maia / Andreza C. Soares</div>
       </div>
-      <div class="photo-frame">📷 Foto (Enviada)</div>
+      <div class="photo-frame">
+        <img src="https://drive.google.com/uc?export=view&id=1wxlDTc55nkbpuyr2pAQwYvIN4HsAxpXA" alt="Equipe E.P.C.">
+      </div>
     </div>
   </div>
 
