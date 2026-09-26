@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classificação Final e Pódios — MOCIU 2026</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg-top:#eaf4fb;
@@ -168,27 +176,25 @@
     position: relative;
   }
   
-  /* Padrão geral para fotos */
   .photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 80%; /* Desloca o foco para baixo para focar nas pessoas e tirar o teto */
-    transform: scale(1.25); /* Dá um zoom suave para preencher perfeitamente os lados */
+    object-position: center 75%; 
+    transform: scale(1.2); 
     transition: transform 0.35s ease;
   }
 
-  /* Ajustes específicos para fotos que precisem de tratamento especial */
-  .photo-frame img.magneto-foto {
-    transform: scale(1.0); /* Foto do meio já está excelente */
+  .photo-frame img.foto-horizontal {
+    transform: scale(1.0);
     object-position: center center;
   }
 
   .photo-frame:hover img {
-    transform: scale(1.35);
+    transform: scale(1.3);
   }
-  .photo-frame:hover img.magneto-foto {
-    transform: scale(1.08);
+  .photo-frame:hover img.foto-horizontal {
+    transform: scale(1.06);
   }
 
   .photo-frame.pending {
@@ -210,3 +216,224 @@
     color:var(--ink-soft);
   }
 </style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">← Voltar para a Página Inicial</a>
+  
+  <header>
+    <h1>Classificação Final & Pódios</h1>
+    <p class="subtitle">MOCIU 2026 — Relação Oficial de Premiados por Sala e Geral</p>
+  </header>
+
+  <!-- GERAL -->
+  <div class="section-title">🏆 Premiação Geral</div>
+  <div class="grid-pods">
+    <div class="pod-card champion">
+      <span class="badge gold-badge">1º Geral</span>
+      <div class="pod-title">Grande Campeão Geral</div>
+      <div class="pod-work">ECOBUILD (Fase II)</div>
+      
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
+      </div>
+      
+      <div class="photo-frame">
+        <img src="fotos/Ecobuild - Foto - Andreza Soares.jpeg" alt="Equipe ECOBUILD">
+      </div>
+    </div>
+
+    <div class="pod-card silver">
+      <span class="badge silver-badge">2º Geral</span>
+      <div class="pod-title">2º Lugar Geral</div>
+      <div class="pod-work">MAGNETO (Fase II)</div>
+      
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">João Victor R. Bizarri, Renata Cabrera</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
+      </div>
+
+      <div class="photo-frame">
+        <img src="fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg" alt="Equipe MAGNETO" class="foto-horizontal">
+      </div>
+    </div>
+
+    <div class="pod-card bronze">
+      <span class="badge bronze-badge">3º Geral</span>
+      <div class="pod-title">3º Lugar Geral</div>
+      <div class="pod-work">POLITINTA (Fase II)</div>
+      
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabella R. de Souza, Mylena Camiloti</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
+      </div>
+
+      <div class="photo-frame">
+        <img src="fotos/Politinta - Foto - Andreza Soares.jpeg" alt="Equipe POLITINTA">
+      </div>
+    </div>
+  </div>
+
+  <!-- SALAS -->
+  <div class="section-title">🎖️ Destaques por Sala (Salas 1 a 4)</div>
+  <div class="grid-pods">
+    
+    <!-- Sala 1 -->
+    <div class="pod-card gold">
+      <span class="badge gold-badge">1º Sala 1</span>
+      <div class="pod-title">Sala 1</div>
+      <div class="pod-work">ECOBUILD (Fase II)</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/Ecobuild - Foto - Andreza Soares.jpeg" alt="Equipe ECOBUILD"></div>
+    </div>
+
+    <div class="pod-card silver">
+      <span class="badge silver-badge">2º Sala 1</span>
+      <div class="pod-title">Sala 1</div>
+      <div class="pod-work">ECOARGAMASSA</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ruty A. da Silva, Sophia V. Pires</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/massa.jpeg" alt="Equipe ECOARGAMASSA"></div>
+    </div>
+
+    <div class="pod-card bronze">
+      <span class="badge bronze-badge">3º Sala 1</span>
+      <div class="pod-title">Sala 1</div>
+      <div class="pod-work">ECOBLOCO PET</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabelli V. P. Silva</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Eduardo V. Santos</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/IMG_6741 - Eduardo Vedovetto.jpeg" alt="Equipe ECOBLOCO PET" class="foto-horizontal"></div>
+    </div>
+
+    <!-- Sala 2 -->
+    <div class="pod-card gold">
+      <span class="badge gold-badge">1º Sala 2</span>
+      <div class="pod-title">Sala 2</div>
+      <div class="pod-work">SMART FILME</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Jhenifer R. S. Lima, Claudinei F. O. Junior, Pedro H. B. Germano</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/IMG_6869 - Pedro Henrique.jpeg" alt="Equipe SMART FILME" class="foto-horizontal"></div>
+    </div>
+
+    <div class="pod-card silver">
+      <span class="badge silver-badge">2º Sala 2</span>
+      <div class="pod-title">Sala 2</div>
+      <div class="pod-work">Tubecoffee (Fase II)</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Sophia H. A. Lhamas, Gabriel M. Monteiro</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/Tubecoffee - Foto - Andreza Soares.jpeg" alt="Equipe Tubecoffee"></div>
+    </div>
+
+    <div class="pod-card bronze">
+      <span class="badge bronze-badge">3º Sala 2</span>
+      <div class="pod-title">Sala 2</div>
+      <div class="pod-work">Tapioca, Identidade e Território</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio estadual do campo Rômulo Galvão</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Jennefer Santos, Yasmim F. de Sousa</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Nadja C. da Silva</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/2ed2cf85-c423-4d79-a68a-e618fbda2303 - Nádja Cajado da Silva.jpeg" alt="Equipe Tapioca"></div>
+    </div>
+
+    <!-- Sala 3 -->
+    <div class="pod-card gold">
+      <span class="badge gold-badge">1º Sala 3</span>
+      <div class="pod-title">Sala 3</div>
+      <div class="pod-work">POLITINTA (Fase II)</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabella R. de Souza, Mylena Camiloti</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/Politinta - Foto - Andreza Soares.jpeg" alt="Equipe POLITINTA"></div>
+    </div>
+
+    <div class="pod-card silver">
+      <span class="badge silver-badge">2º Sala 3</span>
+      <div class="pod-title">Sala 3</div>
+      <div class="pod-work">Doença de Chagas em Wagner-BA</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Centro T. de Educação Profissional CDI</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Cibele S. Brito, Thaís S. Moreira, Hemiliesley M. Silva</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Tiago O. Souza</span></div>
+      </div>
+      <div class="photo-frame pending">⚠️ Foto Pendente</div>
+    </div>
+
+    <div class="pod-card bronze">
+      <span class="badge bronze-badge">3º Sala 3</span>
+      <div class="pod-title">Sala 3</div>
+      <div class="pod-work">Neuro Trema</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabella S. Sakata, Maísa G. Cardoso</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/D4C7BE93-3E6E-446C-A148-ABC474BF9A95 - Maisa.png" alt="Equipe Neuro Trema"></div>
+    </div>
+
+    <!-- Sala 4 -->
+    <div class="pod-card gold">
+      <span class="badge gold-badge">1º Sala 4</span>
+      <div class="pod-title">Sala 4</div>
+      <div class="pod-work">MAGNETO (Fase II)</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">João Victor R. Bizarri, Renata Cabrera</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg" alt="Equipe MAGNETO" class="foto-horizontal"></div>
+    </div>
+
+    <div class="pod-card silver">
+      <span class="badge silver-badge">2º Sala 4</span>
+      <div class="pod-title">Sala 4</div>
+      <div class="pod-work">BIOCOPPER: Síntese Verde de Nanopartículas</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza de Oliveira Carvalho</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle Giovanna do Couto de Oliveira</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/9795291e-7e02-498b-925b-c48e3f50fa4c - Ana Luiza de Oliveira Car....jpeg" alt="Equipe BioCopper"></div>
+    </div>
+
+    <div class="pod-card bronze">
+      <span class="badge bronze-badge">3º Sala 4</span>
+      <div class="pod-title">Sala 4</div>
+      <div class="pod-work">E.P.C. (Acaricida - Fase II)</div>
+      <div class="pod-info">
+        <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
+        <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Heloísa M. de Moraes, Isla R. Silva, Melissa Maia</span></div>
+        <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
+      </div>
+      <div class="photo-frame"><img src="fotos/EPC - Foto - Andreza Soares.jpeg" alt="Equipe E.P.C."></div>
+    </div>
+  </div>
+
+  <footer>
+    MOCIU — Mostra de Ciências de Umuarama 2026 · Instituto Federal do Paraná
+  </footer>
+</div>
+</body>
+</html>
