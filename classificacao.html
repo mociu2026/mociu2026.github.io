@@ -162,31 +162,44 @@
     color:#2b3e4a;
   }
 
-  /* Moldura inteligente: usa contain para nunca cortar nenhuma foto (vertical ou horizontal) */
+  /* Moldura Harmoniosa sem faixas pretas (Efeito de Fundo Borrado / Blur) */
   .photo-frame{
     width: 100%;
     height: 220px; 
-    background: #0b1329; /* Fundo elegante que emoldura perfeitamente fotos verticais */
     border-radius: 8px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto;
-    border: 1px solid rgba(0,0,0,.1);
     position: relative;
+    margin-top: auto;
+    border: 1px solid rgba(0,0,0,.08);
+    background: #1a2332;
+  }
+
+  /* Fundo desfocado para preencher com harmonia qualquer proporção de foto */
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--bg-img);
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px) brightness(0.6);
+    transform: scale(1.1);
+    z-index: 1;
   }
   
+  /* Imagem principal perfeitamente centralizada e sem cortes agressivos */
   .photo-frame img {
+    position: relative;
+    z-index: 2;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Exibe a imagem inteira sem cortes indesejados */
+    object-fit: contain;
     object-position: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
   }
 
   .photo-frame:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
   }
 
   .photo-frame.pending {
@@ -197,7 +210,11 @@
     font-size: 13px;
     font-weight: 700;
     flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+  .photo-frame.pending::before { display: none; }
 
   footer{
     text-align:center;
@@ -224,14 +241,12 @@
       <span class="badge gold-badge">1º Geral</span>
       <div class="pod-title">Grande Campeão Geral</div>
       <div class="pod-work">ECOBUILD (Fase II)</div>
-      
       <div class="pod-info">
         <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
       </div>
-      
-      <div class="photo-frame">
+      <div class="photo-frame" style="--bg-img: url('fotos/Ecobuild - Foto - Andreza Soares.jpeg');">
         <img src="fotos/Ecobuild - Foto - Andreza Soares.jpeg" alt="Equipe ECOBUILD">
       </div>
     </div>
@@ -240,14 +255,12 @@
       <span class="badge silver-badge">2º Geral</span>
       <div class="pod-title">2º Lugar Geral</div>
       <div class="pod-work">MAGNETO (Fase II)</div>
-      
       <div class="pod-info">
         <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">IFPR - Campus Umuarama</span></div>
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">João Victor R. Bizarri, Renata Cabrera</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
       </div>
-
-      <div class="photo-frame">
+      <div class="photo-frame" style="--bg-img: url('fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg');">
         <img src="fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg" alt="Equipe MAGNETO">
       </div>
     </div>
@@ -256,14 +269,12 @@
       <span class="badge bronze-badge">3º Geral</span>
       <div class="pod-title">3º Lugar Geral</div>
       <div class="pod-work">POLITINTA (Fase II)</div>
-      
       <div class="pod-info">
         <div class="info-group"><span class="info-label">🏫 Instituição</span><span class="info-value">Colégio Sesi - Santo Antônio da Platina</span></div>
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabella R. de Souza, Mylena Camiloti</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
       </div>
-
-      <div class="photo-frame">
+      <div class="photo-frame" style="--bg-img: url('fotos/Politinta - Foto - Andreza Soares.jpeg');">
         <img src="fotos/Politinta - Foto - Andreza Soares.jpeg" alt="Equipe POLITINTA">
       </div>
     </div>
@@ -283,7 +294,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza C. de Souza, Gabriel S. Costa, Rebeca V. Pereira</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/Ecobuild - Foto - Andreza Soares.jpeg" alt="Equipe ECOBUILD"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/Ecobuild - Foto - Andreza Soares.jpeg');"><img src="fotos/Ecobuild - Foto - Andreza Soares.jpeg" alt="Equipe ECOBUILD"></div>
     </div>
 
     <div class="pod-card silver">
@@ -295,7 +306,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ruty A. da Silva, Sophia V. Pires</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/massa.jpeg" alt="Equipe ECOARGAMASSA"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/massa.jpeg');"><img src="fotos/massa.jpeg" alt="Equipe ECOARGAMASSA"></div>
     </div>
 
     <div class="pod-card bronze">
@@ -307,7 +318,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabelli V. P. Silva</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Eduardo V. Santos</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/IMG_6741 - Eduardo Vedovetto.jpeg" alt="Equipe ECOBLOCO PET"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/IMG_6741 - Eduardo Vedovetto.jpeg');"><img src="fotos/IMG_6741 - Eduardo Vedovetto.jpeg" alt="Equipe ECOBLOCO PET"></div>
     </div>
 
     <!-- Sala 2 -->
@@ -320,7 +331,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Jhenifer R. S. Lima, Claudinei F. O. Junior, Pedro H. B. Germano</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/IMG_6869 - Pedro Henrique.jpeg" alt="Equipe SMART FILME"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/IMG_6869 - Pedro Henrique.jpeg');"><img src="fotos/IMG_6869 - Pedro Henrique.jpeg" alt="Equipe SMART FILME"></div>
     </div>
 
     <div class="pod-card silver">
@@ -332,7 +343,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Sophia H. A. Lhamas, Gabriel M. Monteiro</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/Tubecoffee - Foto - Andreza Soares.jpeg" alt="Equipe Tubecoffee"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/Tubecoffee - Foto - Andreza Soares.jpeg');"><img src="fotos/Tubecoffee - Foto - Andreza Soares.jpeg" alt="Equipe Tubecoffee"></div>
     </div>
 
     <div class="pod-card bronze">
@@ -344,7 +355,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Jennefer Santos, Yasmim F. de Sousa</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Nadja C. da Silva</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/2ed2cf85-c423-4d79-a68a-e618fbda2303 - Nádja Cajado da Silva.jpeg" alt="Equipe Tapioca"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/2ed2cf85-c423-4d79-a68a-e618fbda2303 - Nádja Cajado da Silva.jpeg');"><img src="fotos/2ed2cf85-c423-4d79-a68a-e618fbda2303 - Nádja Cajado da Silva.jpeg" alt="Equipe Tapioca"></div>
     </div>
 
     <!-- Sala 3 -->
@@ -357,7 +368,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabella R. de Souza, Mylena Camiloti</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/Politinta - Foto - Andreza Soares.jpeg" alt="Equipe POLITINTA"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/Politinta - Foto - Andreza Soares.jpeg');"><img src="fotos/Politinta - Foto - Andreza Soares.jpeg" alt="Equipe POLITINTA"></div>
     </div>
 
     <div class="pod-card silver">
@@ -381,7 +392,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Isabella S. Sakata, Maísa G. Cardoso</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/D4C7BE93-3E6E-446C-A148-ABC474BF9A95 - Maisa.png" alt="Equipe Neuro Trema"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/D4C7BE93-3E6E-446C-A148-ABC474BF9A95 - Maisa.png');"><img src="fotos/D4C7BE93-3E6E-446C-A148-ABC474BF9A95 - Maisa.png" alt="Equipe Neuro Trema"></div>
     </div>
 
     <!-- Sala 4 -->
@@ -394,7 +405,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">João Victor R. Bizarri, Renata Cabrera</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle G. C. de Oliveira</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg" alt="Equipe MAGNETO"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg');"><img src="fotos/IMG-20260924-WA0021 - Renata Cabrera.jpg" alt="Equipe MAGNETO"></div>
     </div>
 
     <div class="pod-card silver">
@@ -406,7 +417,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza de Oliveira Carvalho</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle Giovanna do Couto de Oliveira</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/9795291e-7e02-498b-925b-c48e3f50fa4c - Ana Luiza de Oliveira Car....jpeg" alt="Equipe BioCopper"></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/9795291e-7e02-498b-925b-c48e3f50fa4c - Ana Luiza de Oliveira Car....jpeg');"><img src="fotos/9795291e-7e02-498b-925b-c48e3f50fa4c - Ana Luiza de Oliveira Car....jpeg" alt="Equipe BioCopper"></div>
     </div>
 
     <div class="pod-card bronze">
@@ -418,7 +429,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Heloísa M. de Moraes, Isla R. Silva, Melissa Maia</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Andreza C. Soares</span></div>
       </div>
-      <div class="photo-frame"><img src="fotos/EPC - Foto - Andreza Soares.jpeg" alt="Equipe E.P.C."></div>
+      <div class="photo-frame" style="--bg-img: url('fotos/EPC - Foto - Andreza Soares.jpeg');"><img src="fotos/EPC - Foto - Andreza Soares.jpeg" alt="Equipe E.P.C."></div>
     </div>
   </div>
 
