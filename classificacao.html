@@ -154,11 +154,10 @@
     color:#2b3e4a;
   }
 
-  /* Moldura Otimizada para fotos verticais e horizontais */
   .photo-frame{
     width: 100%;
     height: 210px; 
-    background: #0f172a; /* Fundo escuro elegante que combina com qualquer proporção de foto */
+    background: #0f172a;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -169,17 +168,26 @@
     position: relative;
   }
   
-  /* Ajuste inteligente: contain garante que a imagem apareça inteira sem cortes indesejados */
+  /* Padrão geral para fotos */
   .photo-frame img {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
-    object-position: center;
+    object-fit: cover;
+    object-position: center 80%; /* Desloca o foco para baixo para focar nas pessoas e tirar o teto */
+    transform: scale(1.25); /* Dá um zoom suave para preencher perfeitamente os lados */
     transition: transform 0.35s ease;
   }
 
-  /* Efeito de zoom ao passar o mouse */
+  /* Ajustes específicos para fotos que precisem de tratamento especial */
+  .photo-frame img.magneto-foto {
+    transform: scale(1.0); /* Foto do meio já está excelente */
+    object-position: center center;
+  }
+
   .photo-frame:hover img {
+    transform: scale(1.35);
+  }
+  .photo-frame:hover img.magneto-foto {
     transform: scale(1.08);
   }
 
@@ -191,6 +199,7 @@
     font-size: 13px;
     font-weight: 700;
     flex-direction: column;
+    transform: none !important;
   }
 
   footer{
