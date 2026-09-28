@@ -162,7 +162,6 @@
     color:#2b3e4a;
   }
 
-  /* Moldura preenchida harmoniosamente (cover) com foco na altura das pessoas */
   .photo-frame{
     width: 100%;
     height: 220px; 
@@ -177,26 +176,13 @@
   .photo-frame img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Preenche totalmente o quadro sem deixar sobras pretas */
-    object-position: center 35%; /* Foco na altura ideal onde ficam os rostos das pessoas */
+    object-fit: cover;
+    object-position: center 35%;
     transition: transform 0.4s ease;
   }
 
   .photo-frame:hover img {
-    transform: scale(1.08); /* Zoom suave e elegante ao passar o mouse */
-  }
-
-  .photo-frame.pending {
-    background: rgba(0,0,0,.04);
-    border: 2px dashed rgba(0,0,0,.15);
-    color: #8a8574;
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    transform: scale(1.08);
   }
 
   footer{
@@ -363,7 +349,8 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Cibele S. Brito, Thaís S. Moreira, Hemiliesley M. Silva</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Tiago O. Souza</span></div>
       </div>
-      <div class="photo-frame pending">⚠️ Foto Pendente</div>
+      <!-- ATUALIZADO COM A FOTO DA CIBELE AQUI -->
+      <div class="photo-frame"><img src="fotos/cibele.jpeg" alt="Equipe Doença de Chagas"></div>
     </div>
 
     <div class="pod-card bronze">
@@ -400,7 +387,7 @@
         <div class="info-group"><span class="info-label">🎓 Autores</span><span class="info-value">Ana Luiza de Oliveira Carvalho</span></div>
         <div class="info-group"><span class="info-label">👨‍🏫 Orientação</span><span class="info-value">Giselle Giovanna do Couto de Oliveira</span></div>
       </div>
-      <div class="photo-frame pending">⚠️ Foto Pendente</div>
+      <div class="photo-frame"><img src="fotos/9795291e-7e02-498b-925b-c48e3f50fa4c - Ana Luiza de Oliveira Car....jpeg" alt="Equipe BioCopper"></div>
     </div>
 
     <div class="pod-card bronze">
