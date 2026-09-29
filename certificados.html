@@ -66,7 +66,6 @@
     margin-bottom:28px;
   }
 
-  /* Seletor de Categorias (Abas/Botões) */
   .category-selector {
     display: flex;
     justify-content: center;
@@ -192,10 +191,9 @@
     <h1>Emissão de Certificados</h1>
     <p class="desc">Selecione seu perfil abaixo e digite seu nome para localizar seu certificado da MOCIU 2026.</p>
 
-    <!-- Botões de Alternância de Perfil -->
     <div class="category-selector">
       <button class="btn-cat active" onclick="mudarPerfil('estudante', this)">🎓 Estudantes</button>
-      <button class="btn-cat" onclick="mudarPerfil('orientador', this)">👨‍‍🏫 Orientadores</button>
+      <button class="btn-cat" onclick="mudarPerfil('orientador', this)">👨‍🏫 Orientadores</button>
       <button class="btn-cat" onclick="mudarPerfil('avaliador', this)">⭐ Avaliadores</button>
     </div>
 
@@ -208,7 +206,6 @@
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <!-- Botão customizado que abre o PDF de forma blindada -->
       <button id="downloadBtn" onclick="abrirCertificado()" class="btn-download-cert">📄 Visualizar / Baixar Certificado</button>
     </div>
 
@@ -337,8 +334,8 @@
       const nomeEncontrado = result[0].item;
       const nomeArquivo = `${prefixoArquivo}${nomeEncontrado}.pdf`;
       
-      // Armazena a URL limpa com codificação correta
-      urlAtual = `${pasta}/${encodeURIComponent(nomeArquivo)}`;
+      // Monta a URL usando a raiz exata do domínio do site (evita erros relativos de 404)
+      urlAtual = `${window.location.origin}/${pasta}/${nomeArquivo}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
       resultArea.style.display = 'block';
