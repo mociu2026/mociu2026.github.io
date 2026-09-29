@@ -6,7 +6,6 @@
 <title>Emissão de Certificados — MOCIU 2026</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<!-- Biblioteca Fuse.js para tolerar erros de digitação e acentos -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 
 <style>
@@ -160,8 +159,6 @@
     text-decoration:none;
     box-shadow:0 6px 16px rgba(63,207,142,.3);
     transition: background 0.2s;
-    cursor: pointer;
-    border: none;
   }
   .btn-download-cert:hover{
     background:#34b077;
@@ -199,15 +196,14 @@
 
     <div class="input-group">
       <label id="labelName" for="searchInput">Nome do Estudante:</label>
-      <input type="text" id="searchInput" placeholder="Ex: Daniel Martins de Souza">
+      <input type="text" id="searchInput" placeholder="Ex: Clara Fernandes">
     </div>
 
     <button class="btn-search" onclick="buscarCertificado()">Consultar Certificado</button>
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <!-- Usando tag <a> padrão para download -->
-      <a id="downloadLink" href="#" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
+      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
@@ -238,7 +234,7 @@
 
     if (perfil === 'estudante') {
       label.innerText = "Nome do Estudante:";
-      input.placeholder = "Ex: Daniel Martins de Souza";
+      input.placeholder = "Ex: Clara Fernandes";
     } else if (perfil === 'orientador') {
       label.innerText = "Nome do Orientador(a):";
       input.placeholder = "Ex: Andreza Cristina Soares";
@@ -278,9 +274,10 @@
     "Ricardo Barbosa de Sousa", "Tamires de Lima Marques", "Tiago Oliveira Souza"
   ];
 
+  // Configuração corrigida: threshold restrito (0.15) para evitar falsos positivos
   const options = {
     includeScore: true,
-    threshold: 0.4,
+    threshold: 0.15,
     ignoreLocation: true,
     ignoreFieldNorm: true
   };
@@ -314,7 +311,7 @@
       errorArea.style.display = 'block';
       return;
     } else {
-      errorArea.innerText = "Nenhum certificado encontrado para este nome. Verifique se o nome digitado está próximo do cadastrado.";
+      errorArea.innerText = "Nenhum certificado encontrado para este nome. Verifique a digitação.";
     }
 
     let result = [];
@@ -333,20 +330,12 @@
 
     if(result.length > 0) {
       const nomeEncontrado = result[0].item;
-      // Removendo o encodeURIComponent da construção da string da URL e substituindo espaços nativamente
       const nomeArquivo = `${prefixoArquivo}${nomeEncontrado}.pdf`;
       
-      // Cria a URL completa baseada no local exato onde o site está rodando
-      const basePath = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
-      
-      // Montagem absoluta para evitar problemas do GitHub Pages
-      const fullUrl = `${basePath}/${pasta}/${nomeArquivo}`;
+      const urlCertificado = `${pasta}/${encodeURIComponent(nomeArquivo)}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
-      
-      downloadLink.href = fullUrl;
-      // O target=_blank garante que, caso o navegador queira abrir, abra noutra aba
-      downloadLink.target = "_blank"; 
+      downloadLink.href = urlCertificado;
       
       resultArea.style.display = 'block';
     } else {
