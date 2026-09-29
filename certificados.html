@@ -6,7 +6,7 @@
 <title>Emissão de Certificados — MOCIU 2026</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<!-- Incluindo a biblioteca Fuse.js para tolerar erros de digitação e acentos -->
+<!-- Biblioteca Fuse.js para tolerar erros de digitação e acentos -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 
 <style>
@@ -30,7 +30,7 @@
     justify-content:space-between;
   }
   .container{
-    max-width:680px;
+    max-width:700px;
     margin:0 auto;
     width:100%;
   }
@@ -63,7 +63,37 @@
   p.desc{
     font-size:15px;
     color:var(--ink-soft);
-    margin-bottom:32px;
+    margin-bottom:28px;
+  }
+
+  /* Seletor de Categorias (Abas/Botões) */
+  .category-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .btn-cat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--ink-soft);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-cat:hover {
+    background: rgba(255,255,255,0.15);
+    color: var(--ink);
+  }
+  .btn-cat.active {
+    background: var(--highlight);
+    color: #132a36;
+    border-color: var(--highlight);
+    box-shadow: 0 4px 12px rgba(255,217,61,0.3);
   }
 
   .input-group{
@@ -158,23 +188,29 @@
 
   <div class="card-box">
     <h1>Emissão de Certificados</h1>
-    <p class="desc">Digite seu nome para localizar seu certificado da MOCIU 2026. O sistema corrige automaticamente pequenos erros de digitação.</p>
+    <p class="desc">Selecione seu perfil abaixo e digite seu nome para localizar seu certificado da MOCIU 2026.</p>
+
+    <!-- Botões de Alternância de Perfil -->
+    <div class="category-selector">
+      <button class="btn-cat active" onclick="mudarPerfil('estudante', this)">🎓 Estudantes</button>
+      <button class="btn-cat" onclick="mudarPerfil('orientador', this)">👨‍🏫 Orientadores</button>
+      <button class="btn-cat" onclick="mudarPerfil('avaliador', this)">⭐ Avaliadores</button>
+    </div>
 
     <div class="input-group">
-      <label for="studentName">Nome do Estudante:</label>
-      <input type="text" id="studentName" placeholder="Ex: Ana Luiza Corsini de Souza">
+      <label id="labelName" for="searchInput">Nome do Estudante:</label>
+      <input type="text" id="searchInput" placeholder="Ex: Ana Luiza Corsini de Souza">
     </div>
 
     <button class="btn-search" onclick="buscarCertificado()">Consultar Certificado</button>
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <!-- Aberto em nova aba de forma segura -->
       <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
-      Nenhum certificado encontrado. Verifique se o nome digitado está próximo do cadastrado.
+      Nenhum certificado encontrado para este nome. Verifique a digitação.
     </div>
   </div>
 </div>
@@ -184,6 +220,37 @@
 </footer>
 
 <script>
+  let perfilAtual = 'estudante';
+
+  function mudarPerfil(perfil, btn) {
+    perfilAtual = perfil;
+    
+    // Atualiza classes dos botões
+    document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Limpa campos e resultados anteriores
+    document.getElementById('searchInput').value = '';
+    document.getElementById('resultArea').style.display = 'none';
+    document.getElementById('errorArea').style.display = 'none';
+
+    // Ajusta placeholder e rótulos
+    const input = document.getElementById('searchInput');
+    const label = document.getElementById('labelName');
+
+    if (perfil === 'estudante') {
+      label.innerText = "Nome do Estudante:";
+      input.placeholder = "Ex: Ana Luiza Corsini de Souza";
+    } else if (perfil === 'orientador') {
+      label.innerText = "Nome do Orientador(a):";
+      input.placeholder = "Ex: Andreza Cristina Soares";
+    } else if (perfil === 'avaliador') {
+      label.innerText = "Nome do Avaliador(a):";
+      input.placeholder = "Em breve...";
+    }
+  }
+
+  // Bancos de dados de nomes oficiais
   const estudantes = [
     "Ana Luiza Corsini de Souza", "Antônio João de Lima Ferroni", "Carlos Eduardo de Oliveira Gabiatti", 
     "Cibele Sophia de Souza Novaes Brito", "Clara Fernandes", "Claudinei Freitas de Oliveira Junior", 
@@ -207,22 +274,31 @@
     "Sophia Volpato Pires", "Yasmim Ferreira de Sousa"
   ];
 
+  const orientadores = [
+    "Andreza Cristina Soares", "Bruna Tais Ferreira de Mello", "Eduardo Vedovetto Santos", 
+    "Fernando Rodrigues de Carvalho", "Francisco Renato Moreira da Silva", "Gilvana Kelly Vasconcelos", 
+    "Giselle Giovana do Couto de Oliveira", "Nadja Cajado da Silva", "Nailson Feitosa Nascimento", 
+    "Ricardo Barbosa de Sousa", "Tamires de Lima Marques", "Tiago Oliveira Souza"
+  ];
+
   const options = {
     includeScore: true,
     threshold: 0.4,
     ignoreLocation: true,
     ignoreFieldNorm: true
   };
-  const fuse = new Fuse(estudantes, options);
 
-  document.getElementById('studentName').addEventListener('keypress', function (e) {
+  const fuseEstudantes = new Fuse(estudantes, options);
+  const fuseOrientadores = new Fuse(orientadores, options);
+
+  document.getElementById('searchInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       buscarCertificado();
     }
   });
 
   function buscarCertificado() {
-    const inputVal = document.getElementById('studentName').value.trim();
+    const inputVal = document.getElementById('searchInput').value.trim();
     const resultArea = document.getElementById('resultArea');
     const errorArea = document.getElementById('errorArea');
     const successText = document.getElementById('successText');
@@ -232,20 +308,39 @@
     resultArea.style.display = 'none';
 
     if(!inputVal) {
-      alert('Por favor, digite o nome do estudante.');
+      alert('Por favor, digite um nome para a busca.');
       return;
     }
 
-    const result = fuse.search(inputVal);
+    // Se perfil for avaliador (ainda sem certificados)
+    if (perfilAtual === 'avaliador') {
+      errorArea.innerText = "Os certificados para avaliadores estarão disponíveis em breve.";
+      errorArea.style.display = 'block';
+      return;
+    } else {
+      errorArea.innerText = "Nenhum certificado encontrado para este nome. Verifique se o nome digitado está próximo do cadastrado.";
+    }
+
+    let result = [];
+    let pasta = '';
+    let prefixoArquivo = '';
+
+    if (perfilAtual === 'estudante') {
+      result = fuseEstudantes.search(inputVal);
+      pasta = 'certificados';
+      prefixoArquivo = 'Certificado - ';
+    } else if (perfilAtual === 'orientador') {
+      result = fuseOrientadores.search(inputVal);
+      pasta = 'certificados_orientadores';
+      prefixoArquivo = 'Certificado Orientador - ';
+    }
 
     if(result.length > 0) {
       const nomeEncontrado = result[0].item;
-      const nomeArquivo = `Certificado - ${nomeEncontrado}.pdf`;
-      const urlCertificado = `certificados/${encodeURIComponent(nomeArquivo)}`;
+      const nomeArquivo = `${prefixoArquivo}${nomeEncontrado}.pdf`;
+      const urlCertificado = `${pasta}/${encodeURIComponent(nomeArquivo)}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
-      
-      // Aponta para o arquivo codificado de forma limpa na pasta do site
       downloadLink.href = urlCertificado;
       
       resultArea.style.display = 'block';
