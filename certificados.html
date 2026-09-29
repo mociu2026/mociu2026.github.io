@@ -206,7 +206,8 @@
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
+      <!-- Usando tag <a> padrão para download -->
+      <a id="downloadLink" href="#" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
@@ -332,13 +333,20 @@
 
     if(result.length > 0) {
       const nomeEncontrado = result[0].item;
+      // Removendo o encodeURIComponent da construção da string da URL e substituindo espaços nativamente
       const nomeArquivo = `${prefixoArquivo}${nomeEncontrado}.pdf`;
       
-      // Caminho relativo estrito compatível com qualquer estrutura do GitHub Pages
-      const urlRelativa = `./${pasta}/${encodeURIComponent(nomeArquivo)}`;
+      // Cria a URL completa baseada no local exato onde o site está rodando
+      const basePath = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+      
+      // Montagem absoluta para evitar problemas do GitHub Pages
+      const fullUrl = `${basePath}/${pasta}/${nomeArquivo}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
-      downloadLink.href = urlRelativa;
+      
+      downloadLink.href = fullUrl;
+      // O target=_blank garante que, caso o navegador queira abrir, abra noutra aba
+      downloadLink.target = "_blank"; 
       
       resultArea.style.display = 'block';
     } else {
