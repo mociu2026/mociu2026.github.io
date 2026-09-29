@@ -199,14 +199,14 @@
 
     <div class="input-group">
       <label id="labelName" for="searchInput">Nome do Estudante:</label>
-      <input type="text" id="searchInput" placeholder="Ex: Ana Luiza Corsini de Souza">
+      <input type="text" id="searchInput" placeholder="Ex: Daniel Martins de Souza">
     </div>
 
     <button class="btn-search" onclick="buscarCertificado()">Consultar Certificado</button>
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <button id="downloadBtn" onclick="abrirCertificado()" class="btn-download-cert">📄 Visualizar / Baixar Certificado</button>
+      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
@@ -221,7 +221,6 @@
 
 <script>
   let perfilAtual = 'estudante';
-  let urlAtual = '';
 
   function mudarPerfil(perfil, btn) {
     perfilAtual = perfil;
@@ -238,7 +237,7 @@
 
     if (perfil === 'estudante') {
       label.innerText = "Nome do Estudante:";
-      input.placeholder = "Ex: Ana Luiza Corsini de Souza";
+      input.placeholder = "Ex: Daniel Martins de Souza";
     } else if (perfil === 'orientador') {
       label.innerText = "Nome do Orientador(a):";
       input.placeholder = "Ex: Andreza Cristina Soares";
@@ -299,6 +298,7 @@
     const resultArea = document.getElementById('resultArea');
     const errorArea = document.getElementById('errorArea');
     const successText = document.getElementById('successText');
+    const downloadLink = document.getElementById('downloadLink');
 
     errorArea.style.display = 'none';
     resultArea.style.display = 'none';
@@ -334,19 +334,15 @@
       const nomeEncontrado = result[0].item;
       const nomeArquivo = `${prefixoArquivo}${nomeEncontrado}.pdf`;
       
-      // Monta a URL usando a raiz exata do domínio do site (evita erros relativos de 404)
-      urlAtual = `${window.location.origin}/${pasta}/${nomeArquivo}`;
+      // Caminho relativo estrito compatível com qualquer estrutura do GitHub Pages
+      const urlRelativa = `./${pasta}/${encodeURIComponent(nomeArquivo)}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
+      downloadLink.href = urlRelativa;
+      
       resultArea.style.display = 'block';
     } else {
       errorArea.style.display = 'block';
-    }
-  }
-
-  function abrirCertificado() {
-    if (urlAtual) {
-      window.open(urlAtual, '_blank');
     }
   }
 </script>
