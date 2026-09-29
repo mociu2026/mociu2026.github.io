@@ -161,6 +161,8 @@
     text-decoration:none;
     box-shadow:0 6px 16px rgba(63,207,142,.3);
     transition: background 0.2s;
+    cursor: pointer;
+    border: none;
   }
   .btn-download-cert:hover{
     background:#34b077;
@@ -193,7 +195,7 @@
     <!-- Botões de Alternância de Perfil -->
     <div class="category-selector">
       <button class="btn-cat active" onclick="mudarPerfil('estudante', this)">🎓 Estudantes</button>
-      <button class="btn-cat" onclick="mudarPerfil('orientador', this)">👨‍🏫 Orientadores</button>
+      <button class="btn-cat" onclick="mudarPerfil('orientador', this)">👨‍‍🏫 Orientadores</button>
       <button class="btn-cat" onclick="mudarPerfil('avaliador', this)">⭐ Avaliadores</button>
     </div>
 
@@ -206,7 +208,8 @@
 
     <div id="resultArea">
       <p id="successText" style="font-weight: 600; color: #3fcf8e; margin-bottom: 8px;"></p>
-      <a id="downloadLink" href="#" target="_blank" class="btn-download-cert">📄 Visualizar / Baixar Certificado</a>
+      <!-- Botão customizado que abre o PDF de forma blindada -->
+      <button id="downloadBtn" onclick="abrirCertificado()" class="btn-download-cert">📄 Visualizar / Baixar Certificado</button>
     </div>
 
     <div id="errorArea" class="error-msg" style="display:none;">
@@ -221,20 +224,18 @@
 
 <script>
   let perfilAtual = 'estudante';
+  let urlAtual = '';
 
   function mudarPerfil(perfil, btn) {
     perfilAtual = perfil;
     
-    // Atualiza classes dos botões
     document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // Limpa campos e resultados anteriores
     document.getElementById('searchInput').value = '';
     document.getElementById('resultArea').style.display = 'none';
     document.getElementById('errorArea').style.display = 'none';
 
-    // Ajusta placeholder e rótulos
     const input = document.getElementById('searchInput');
     const label = document.getElementById('labelName');
 
@@ -250,7 +251,6 @@
     }
   }
 
-  // Bancos de dados de nomes oficiais
   const estudantes = [
     "Ana Luiza Corsini de Souza", "Antônio João de Lima Ferroni", "Carlos Eduardo de Oliveira Gabiatti", 
     "Cibele Sophia de Souza Novaes Brito", "Clara Fernandes", "Claudinei Freitas de Oliveira Junior", 
@@ -302,7 +302,6 @@
     const resultArea = document.getElementById('resultArea');
     const errorArea = document.getElementById('errorArea');
     const successText = document.getElementById('successText');
-    const downloadLink = document.getElementById('downloadLink');
 
     errorArea.style.display = 'none';
     resultArea.style.display = 'none';
@@ -312,7 +311,6 @@
       return;
     }
 
-    // Se perfil for avaliador (ainda sem certificados)
     if (perfilAtual === 'avaliador') {
       errorArea.innerText = "Os certificados para avaliadores estarão disponíveis em breve.";
       errorArea.style.display = 'block';
@@ -338,14 +336,20 @@
     if(result.length > 0) {
       const nomeEncontrado = result[0].item;
       const nomeArquivo = `${prefixoArquivo}${nomeEncontrado}.pdf`;
-      const urlCertificado = `${pasta}/${encodeURIComponent(nomeArquivo)}`;
+      
+      // Armazena a URL limpa com codificação correta
+      urlAtual = `${pasta}/${encodeURIComponent(nomeArquivo)}`;
 
       successText.innerHTML = `Certificado localizado para:<br><span style="color:#fff;">${nomeEncontrado}</span>`;
-      downloadLink.href = urlCertificado;
-      
       resultArea.style.display = 'block';
     } else {
       errorArea.style.display = 'block';
+    }
+  }
+
+  function abrirCertificado() {
+    if (urlAtual) {
+      window.open(urlAtual, '_blank');
     }
   }
 </script>
